@@ -1,18 +1,39 @@
-name: My Workflow
+name: Node.js CI
+
 on:
     push:
-        branches:
-            - main
+        branches: [main]
+    pull_request:
+        branches: [main]
+
 jobs:
     build:
         runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: [18.x]
+
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-            - name: Build code
-              run: |
-                  npm install
-                  npm run build
-                  npm run test
-                  npm run format
-                  npm run lint
+
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v2
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Build
+              run: npm run build
+
+            - name: Test
+              run: npm run test
+
+            - name: Format
+              run: npm run format
+
+            - name: Lint
+              run: npm run lint
