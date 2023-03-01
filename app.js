@@ -1,4 +1,4 @@
-const addition = require('./addition');
+const addition = require('./utils/addition');
 
 let a = 10,
     b = 20;
