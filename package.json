@@ -8,6 +8,7 @@
         "start": "nodemon index.js",
         "test": "npx jest .",
         "format": "npx prettier --write .",
+        "prettier": "npx prettier . --check",
         "lint": "npx eslint . --fix"
     },
     "repository": "https://github.com/sourabhossain/github-action.git",
